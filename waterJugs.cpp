@@ -130,7 +130,7 @@ void build_graph(void){
           }else{
             temp6.first = aCap;
           }
-          temp6.second = temp6.second - pair.first;
+          temp6.second = temp6.second - temp6.first;
         
         nbrs[pair].push_back(temp6);
         edge_label[make_pair(pair, temp6)] = actions[5];
