@@ -84,8 +84,8 @@ void build_graph(void){
 
       //Fill B
       state temp2 = pair;
-      if(temp2.second != aCap){
-        temp2.second = aCap;
+      if(temp2.second != bCap){
+        temp2.second = bCap;
         nbrs[pair].push_back(temp2);
         edge_label[make_pair(pair, temp2)] = actions[1];
       }
