@@ -65,12 +65,68 @@ void print_path(state s, state t)
 }
 
 void build_graph(void){
-  
+  int aCap = 3;
+  int bCap = 4;
+  int a = 0;
+  int b = 0;
 
 
+  for(a = 0; a <= 3; a++){
+    for(b = 0; b <= 4; b++){
+      state pair = make_pair(a, b);
+      //Fill A
+      state temp1 = pair;
+      if(temp1.first != aCap){
+        temp1.first = aCap;
+        nbrs[pair].push_back(temp1);
+        edge_label[make_pair(pair, temp1)] = actions[0];
+      }
 
+      //Fill B
+      state temp2 = pair;
+      if(temp2.second != aCap){
+        temp2.second = aCap;
+        nbrs[pair].push_back(temp2);
+        edge_label[make_pair(pair, temp2)] = actions[1];
+      }
+
+      //Empty A
+      state temp3 = pair;
+      if(temp3.first != 0){
+        temp3.first = 0;
+        nbrs[pair].push_back(temp3);
+        edge_label[make_pair(pair, temp3)] = actions[2];
+      }
+
+      //Empty B
+      state temp4 = pair;
+      if(temp4.second != 0){
+        temp4.second = 0;
+        nbrs[pair].push_back(temp4);
+        edge_label[make_pair(pair, temp4)] = actions[3];
+      }
+
+      //Pour A
+      state temp5 = pair;
+      if(temp5.first != 0){
+        temp5.first = temp5.first - (bCap - temp5.second);
+        temp5.second = temp5.second + (temp5.first - (bCap - temp5.second));
+        nbrs[pair].push_back(temp5);
+        edge_label[make_pair(pair, temp5)] = actions[4];
+      }
+
+      //Pour B
+      state temp6 = pair;
+      if(temp6.second != 0){
+        temp6.first = temp6.first - (temp6.first - (aCap - temp6.second));
+        temp6.second = temp6.second + (aCap - temp6.second);
+        nbrs[pair].push_back(temp6);
+        edge_label[make_pair(pair, temp6)] = actions[5];
+      }
+    }
+  }
 }
-/*
+
 int main(void)
 {
   build_graph();
@@ -87,4 +143,3 @@ int main(void)
   
   return 0;
 }
-*/

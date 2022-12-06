@@ -122,7 +122,7 @@ void build_graph(void){
   }
 }
 
-/*
+
 int main(void)
 {
   build_graph();
@@ -137,5 +137,5 @@ int main(void)
   
   return 0;
 }
-*/
+
 
