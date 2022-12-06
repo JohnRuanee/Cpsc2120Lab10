@@ -108,9 +108,15 @@ void build_graph(void){
 
       //Pour A
       state temp5 = pair;
-      if(temp5.first != 0){
-        temp5.first = temp5.first - (bCap - temp5.second);
-        temp5.second = temp5.second + (temp5.first - (bCap - temp5.second));
+       if (temp5.first != 0) {
+         if (temp5.first + temp5.second <= bCap) {
+          temp5.second = temp5.first + temp5.second;
+        }
+        else {
+          temp5.second = bCap;
+        }
+        temp5.first = temp5.first - temp5.second;
+
         nbrs[pair].push_back(temp5);
         edge_label[make_pair(pair, temp5)] = actions[4];
       }
@@ -118,14 +124,21 @@ void build_graph(void){
       //Pour B
       state temp6 = pair;
       if(temp6.second != 0){
-        temp6.first = temp6.first - (temp6.first - (aCap - temp6.second));
-        temp6.second = temp6.second + (aCap - temp6.second);
+
+          if(temp6.first + temp6.second <= aCap){
+            temp6.first = temp6.first + temp6.second;
+          }else{
+            temp6.first = aCap;
+          }
+          temp6.second = temp6.second - pair.first;
+        
         nbrs[pair].push_back(temp6);
         edge_label[make_pair(pair, temp6)] = actions[5];
       }
     }
   }
 }
+
 /*
 int main(void)
 {
