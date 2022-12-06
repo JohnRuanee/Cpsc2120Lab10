@@ -85,26 +85,25 @@ string neighbor_label(int s, int t)
 }
 
 void build_graph(void){
-  for(int curr = 0; curr < 16; curr++){
-    state current = curr;
-    search(curr);
+  for(state curr = 0; curr < 16; curr++){
     bitset<4> bits(curr);
-    bits.flip(me);
     for(int i = 0; i < 4; i++){
-      if(i == me)
-        continue;
-      bitset<4> temp = bits;
-      temp.flip(i);
-      if(temp[goat] == temp[cabbage] && temp[me] != temp[goat]){
-        continue;
+      if(bits[i] == bits[me]){
+        bitset<4> temp = bits;
+        temp.flip(me);
+        if(i != me)
+          temp.flip(i);
+        
+        if(temp[goat] == temp[cabbage] && temp[me] != temp[goat]){
+          continue;
+        }
+        if(temp[goat] == temp[wolf] && temp[me] != temp[goat]){
+          continue;
+        }
+        state next = (int)temp.to_ulong();
+        nbrs[curr].push_back(next);
+        edge_label[make_pair(curr, next)] = neighbor_label(curr, next);
       }
-      if(temp[goat] == temp[wolf] && temp[me] != temp[goat]){
-        continue;
-      }
-      state next = (int)temp.to_ulong();
-      string action = neighbor_label(current, next);
-      nbrs[current].push_back(next);
-      edge_label[make_pair(current, next)] = action;
       
     }
   }
