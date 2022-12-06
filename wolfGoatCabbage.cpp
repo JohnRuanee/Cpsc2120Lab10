@@ -9,6 +9,7 @@
 #include <vector>
 #include <map>
 #include <queue>
+#include <bitset>
 using namespace std;
 
 // Reflects what each node represents...
