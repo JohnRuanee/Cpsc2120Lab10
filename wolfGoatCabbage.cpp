@@ -85,22 +85,35 @@ string neighbor_label(int s, int t)
 }
 
 void build_graph(void){
+  //forloop of current node being checked with state instead of int
   for(state curr = 0; curr < 16; curr++){
+    //var
     bitset<4> bits(curr);
+
+    //forloop to change each bit in bitset
     for(int i = 0; i < 4; i++){
+      //if i is on the same side of the river as you procede
       if(bits[i] == bits[me]){
+        //var
         bitset<4> temp = bits;
+
+        //flip your bit and if you arent i then flip i
         temp.flip(me);
         if(i != me)
           temp.flip(i);
         
+        //checks if goat is with cabbage and not you or if wolf is with goat and not you
         if(temp[goat] == temp[cabbage] && temp[me] != temp[goat]){
           continue;
         }
         if(temp[goat] == temp[wolf] && temp[me] != temp[goat]){
           continue;
         }
+
+        //set changed temp to next
         state next = (int)temp.to_ulong();
+
+        //add next to nbrs at curr and neighbor lable to edge lable at the pair of curr and next
         nbrs[curr].push_back(next);
         edge_label[make_pair(curr, next)] = neighbor_label(curr, next);
       }
@@ -109,7 +122,7 @@ void build_graph(void){
   }
 }
 
-/*
+
 
 int main(void)
 {
@@ -125,4 +138,5 @@ int main(void)
   
   return 0;
 }
-*/
+
+
