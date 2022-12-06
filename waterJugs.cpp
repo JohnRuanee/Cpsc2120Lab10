@@ -28,7 +28,7 @@ const string actions[] = {"Fill A",
 map<state, bool> visited;         // have we queued up this state for visitation?
 map<state, state> pred;           // predecessor state we came from
 map<state, int> dist;             // distance (# of hops) from source node
-map<state, vector<state>> nbrs;   // vector of neighboring states
+map<state, vector<state> > nbrs;   // vector of neighboring states
 
 map<pair<state,state>, string> edge_label;
 
@@ -70,7 +70,7 @@ void build_graph(void){
 
 
 }
-
+/*
 int main(void)
 {
   build_graph();
@@ -87,3 +87,4 @@ int main(void)
   
   return 0;
 }
+*/
